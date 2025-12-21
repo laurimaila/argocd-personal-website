@@ -15,8 +15,7 @@ db:
   user: postgres
 
 storage:
-  size: 10Gi
-  className: standard
+  size: 1Gi
 
 resources:
   requests:

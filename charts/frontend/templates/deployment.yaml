@@ -14,6 +14,10 @@ spec:
       labels:
         app: {{ .Chart.Name }}
     spec:
+      imagePullSecrets:
+        {{- range .Values.imagePullSecrets }}
+        - name: {{ .name }}
+        {{- end }}
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
@@ -49,10 +53,9 @@ kind: Ingress
 metadata:
   name: {{ .Chart.Name }}
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
-    cert-manager.io/cluster-issuer: letsencrypt-prod
+    traefik.ingress.kubernetes.io/router.middlewares: "{{ .Release.Namespace }}-{{ .Chart.Name }}-ratelimit@kubernetescrd"
 spec:
-  ingressClassName: {{ .Values.ingress.className }}
+  ingressClassName: traefik
   tls:
     - hosts:
         - {{ .Values.ingress.host }}

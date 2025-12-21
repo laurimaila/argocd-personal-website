@@ -3,6 +3,9 @@ image:
   tag: "1.1.0"
   pullPolicy: IfNotPresent
 
+imagePullSecrets:
+  - name: regcred
+
 service:
   type: ClusterIP
   port: 80
@@ -10,7 +13,7 @@ service:
 
 ingress:
   enabled: true
-  className: nginx
+  className: traefik
   host: vm2.laurimaila.com
   tls:
     secretName: frontend-tls

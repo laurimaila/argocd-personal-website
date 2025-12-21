@@ -1,7 +1,10 @@
 image:
-  repository: ghcr.io/laurimaila/personal-website-backend
+  repository: ghcr.io/laurimaila/backend-personal-website
   tag: "latest"
   pullPolicy: IfNotPresent
+
+imagePullSecrets:
+  - name: regcred
 
 postgres:
   host: postgres-service
@@ -17,7 +20,7 @@ jwt:
 
 ingress:
   enabled: true
-  className: nginx
+  className: traefik
   host: api2.laurimaila.com
   tls:
     secretName: backend-tls
