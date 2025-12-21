@@ -1,0 +1,27 @@
+image:
+  repository: postgres
+  tag: "15"
+  pullPolicy: IfNotPresent
+
+auth:
+  existingSecret: "postgres-secret"
+  secretKeys:
+    userKey: POSTGRES_USER
+    passwordKey: POSTGRES_PASSWORD
+    dbKey: POSTGRES_DB
+
+db:
+  name: personal_website
+  user: postgres
+
+storage:
+  size: 10Gi
+  className: standard
+
+resources:
+  requests:
+    memory: "256Mi"
+    cpu: "250m"
+  limits:
+    memory: "512Mi"
+    cpu: "500m"

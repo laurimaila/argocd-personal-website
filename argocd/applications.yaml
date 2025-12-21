@@ -1,0 +1,58 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: personal-website-postgres
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/laurimaila/argocd-personal-website.git
+    targetRevision: main
+    path: charts/postgres
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: personal-website
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: personal-website-backend
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/laurimaila/argocd-personal-website.git
+    targetRevision: main
+    path: charts/backend
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: personal-website
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: personal-website-frontend
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/laurimaila/argocd-personal-website.git
+    targetRevision: main
+    path: charts/frontend
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: personal-website
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
