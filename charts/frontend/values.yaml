@@ -1,6 +1,6 @@
 image:
   repository: ghcr.io/laurimaila/personal-website
-  tag: "1.1.0"
+  tag: "latest-k8s"
   pullPolicy: IfNotPresent
 
 imagePullSecrets:
