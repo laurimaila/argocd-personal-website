@@ -1,58 +1,59 @@
 apiVersion: argoproj.io/v1alpha1
-kind: Application
+kind: ApplicationSet
 metadata:
-  name: personal-website-postgres
+  name: personal-website-apps
   namespace: argocd
 spec:
-  project: default
-  source:
-    repoURL: https://github.com/laurimaila/argocd-personal-website.git
-    targetRevision: main
-    path: charts/postgres
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: personal-website
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions:
-      - CreateNamespace=true
----
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: personal-website-backend
-  namespace: argocd
-spec:
-  project: default
-  source:
-    repoURL: https://github.com/laurimaila/argocd-personal-website.git
-    targetRevision: main
-    path: charts/backend
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: personal-website
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
----
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: personal-website-frontend
-  namespace: argocd
-spec:
-  project: default
-  source:
-    repoURL: https://github.com/laurimaila/argocd-personal-website.git
-    targetRevision: main
-    path: charts/frontend
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: personal-website
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
+  generators:
+    - matrix:
+        generators:
+          - list:
+              elements:
+                # Production
+                - branch: main
+                  namespace: personal-website
+                  suffix: ""
+                  imageTag: "latest"
+                # Dev
+                - branch: dev
+                  namespace: personal-website-dev
+                  suffix: "-dev"
+                  imageTag: "latest-dev"
+          - list:
+              elements:
+                - component: postgres
+                  ingressSubdomain: "postgres"
+                  imageTag: "15"
+                - component: backend
+                  ingressSubdomain: "api2"
+                - component: frontend
+                  ingressSubdomain: "vm2"
+  template:
+    metadata:
+      name: "personal-website-{{component}}{{suffix}}"
+      namespace: argocd
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/laurimaila/argocd-personal-website.git
+        targetRevision: "{{branch}}"
+        path: "charts/{{component}}"
+        helm:
+          parameters:
+            - name: ingress.host
+              value: "{{ingressSubdomain}}{{suffix}}.laurimaila.com"
+            - name: ingress.cors.allowOrigin
+              value: "https://vm2{{suffix}}.laurimaila.com"
+            - name: ingress.annotations.traefik\.ingress\.kubernetes\.io/router\.tls\.certresolver
+              value: "myresolver"
+            - name: image.tag
+              value: "{{imageTag}}"
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: "{{namespace}}"
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true

@@ -1,6 +1,5 @@
 apiVersion: v2
-name: backend
-description: ASP.NET Core backend for personal website
+name: personal-website-backend
 type: application
-version: 0.1.0
-appVersion: "1.0.0"
+version: 1.0.0
+appVersion: "1.1.2"

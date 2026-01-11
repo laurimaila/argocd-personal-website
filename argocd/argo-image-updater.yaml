@@ -12,8 +12,19 @@ spec:
     - namePattern: "personal-website-frontend"
       images:
         - alias: "frontend"
-          imageName: "ghcr.io/laurimaila/personal-website:latest-k8s"
-    - namePattern: "backend*"
+          imageName: "ghcr.io/laurimaila/personal-website:latest"
+
+    - namePattern: "personal-website-backend"
       images:
-        - alias: "personal-website-backend"
+        - alias: "backend"
           imageName: "ghcr.io/laurimaila/backend-personal-website:latest"
+
+    - namePattern: "personal-website-frontend-dev"
+      images:
+        - alias: "frontend-dev"
+          imageName: "ghcr.io/laurimaila/personal-website:latest-dev"
+
+    - namePattern: "personal-website-backend-dev"
+      images:
+        - alias: "backend-dev"
+          imageName: "ghcr.io/laurimaila/backend-personal-website:latest-dev"
