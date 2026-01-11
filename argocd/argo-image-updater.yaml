@@ -1,0 +1,19 @@
+apiVersion: argocd-image-updater.argoproj.io/v1alpha1
+kind: ImageUpdater
+metadata:
+  name: personal-website-image-updater
+spec:
+  namespace: argocd
+  commonUpdateSettings:
+    updateStrategy: "digest"
+  writeBackConfig:
+    method: "argocd"
+  applicationRefs:
+    - namePattern: "personal-website-frontend"
+      images:
+        - alias: "frontend"
+          imageName: "ghcr.io/laurimaila/personal-website:latest-k8s"
+    - namePattern: "backend*"
+      images:
+        - alias: "personal-website-backend"
+          imageName: "ghcr.io/laurimaila/backend-personal-website:latest"
