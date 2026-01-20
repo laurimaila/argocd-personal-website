@@ -12,19 +12,23 @@ spec:
     - namePattern: "personal-website-frontend"
       images:
         - alias: "frontend"
-          imageName: "ghcr.io/laurimaila/personal-website:latest"
+          imageName: "ghcr.io/laurimaila/personal-website"
+          updateStrategy: "semver"
+          allowTags: "regexp:^[0-9]+\\.[0-9]+\\.[0-9]+$"
 
     - namePattern: "personal-website-backend"
       images:
         - alias: "backend"
-          imageName: "ghcr.io/laurimaila/backend-personal-website:latest"
+          imageName: "ghcr.io/laurimaila/backend-personal-website"
+          updateStrategy: "semver"
+          allowTags: "regexp:^[0-9]+\\.[0-9]+\\.[0-9]+$"
 
     - namePattern: "personal-website-frontend-dev"
       images:
         - alias: "frontend-dev"
-          imageName: "ghcr.io/laurimaila/personal-website:latest-dev"
+          imageName: "ghcr.io/laurimaila/personal-website:dev"
 
     - namePattern: "personal-website-backend-dev"
       images:
         - alias: "backend-dev"
-          imageName: "ghcr.io/laurimaila/backend-personal-website:latest-dev"
+          imageName: "ghcr.io/laurimaila/backend-personal-website:dev"

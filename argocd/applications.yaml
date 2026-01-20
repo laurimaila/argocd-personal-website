@@ -18,12 +18,12 @@ spec:
                 - branch: dev
                   namespace: personal-website-dev
                   suffix: "-dev"
-                  imageTag: "latest-dev"
+                  imageTag: "dev"
           - list:
               elements:
                 - component: postgres
                   ingressSubdomain: "postgres"
-                  imageTag: "15"
+                  imageTag: "18"
                 - component: backend
                   ingressSubdomain: "api2"
                 - component: frontend
