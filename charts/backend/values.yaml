@@ -27,6 +27,10 @@ ingress:
   cors:
     allowOrigin: "https://vm2.laurimaila.com"
 
+physicsService:
+  host: "physics-svc"
+  port: "50051"
+
 resources:
   requests:
     memory: "256Mi"

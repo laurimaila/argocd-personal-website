@@ -48,6 +48,8 @@ spec:
                   key: {{ .Values.jwt.secretKey }}
             - name: CONNECTION_STRING
               value: "Host={{ .Values.postgres.host }};Database=$(DB_NAME);Username=$(DB_USER);Password=$(DB_PASS)"
+            - name: GO_PHYS_SVC_URL
+              value: "http://{{ .Values.physicsService.host }}:{{ .Values.physicsService.port }}"
             - name: DOTNET_GCServer
               value: "1"
             - name: DOTNET_GCConcurrent
