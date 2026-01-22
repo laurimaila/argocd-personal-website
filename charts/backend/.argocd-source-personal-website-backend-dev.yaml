@@ -10,7 +10,7 @@ helm:
     value: myresolver
     forcestring: false
   - name: image.tag
-    value: 1.4.2
+    value: dev@sha256:ae8d00583f12634b3d063a66a49f793f78f37fc7ada0b591fa2e9111eb9adfdc
     forcestring: true
   - name: image.name
     value: ghcr.io/laurimaila/backend-personal-website
