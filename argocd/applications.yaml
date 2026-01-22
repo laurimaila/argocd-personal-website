@@ -5,29 +5,56 @@ metadata:
   namespace: argocd
 spec:
   generators:
+    # Production
     - matrix:
         generators:
           - list:
               elements:
-                # Production
                 - branch: main
                   namespace: personal-website
                   suffix: ""
-                  imageTag: "latest"
-                # Dev
-                - branch: dev
-                  namespace: personal-website-dev
-                  suffix: "-dev"
-                  imageTag: "dev"
           - list:
               elements:
                 - component: postgres
-                  ingressSubdomain: "postgres"
+                  ingressSubdomain: ""
                   imageTag: "18"
                 - component: backend
                   ingressSubdomain: "api2"
+                  imageTag: "1.4.2"
                 - component: frontend
                   ingressSubdomain: "vm2"
+                  imageTag: "1.3.2"
+                - component: physics-svc
+                  ingressSubdomain: ""
+                  imageTag: "1.4.2"
+                - component: migration-svc
+                  ingressSubdomain: ""
+                  imageTag: "1.4.2"
+    # Dev
+    - matrix:
+        generators:
+          - list:
+              elements:
+                - branch: dev
+                  namespace: personal-website-dev
+                  suffix: "-dev"
+          - list:
+              elements:
+                - component: postgres
+                  ingressSubdomain: ""
+                  imageTag: "18"
+                - component: backend
+                  ingressSubdomain: "api2"
+                  imageTag: "1.4.2"
+                - component: frontend
+                  ingressSubdomain: "vm2"
+                  imageTag: "1.3.2"
+                - component: physics-svc
+                  ingressSubdomain: ""
+                  imageTag: "1.4.2"
+                - component: migration-svc
+                  ingressSubdomain: ""
+                  imageTag: "1.4.2"
   template:
     metadata:
       name: "personal-website-{{component}}{{suffix}}"

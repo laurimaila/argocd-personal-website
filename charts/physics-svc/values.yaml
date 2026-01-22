@@ -1,0 +1,15 @@
+image:
+  repository: ghcr.io/laurimaila/physics-svc
+  tag: "1.4.2"
+  pullPolicy: IfNotPresent
+
+imagePullSecrets:
+  - name: regcred
+
+resources:
+  requests:
+    memory: "128Mi"
+    cpu: "100m"
+  limits:
+    memory: "256Mi"
+    cpu: "250m"

@@ -1,26 +1,23 @@
 image:
-  repository: postgres
-  tag: "18"
+  repository: ghcr.io/laurimaila/liquibase-svc
+  tag: "1.4.2"
   pullPolicy: IfNotPresent
 
-auth:
+imagePullSecrets:
+  - name: regcred
+
+postgres:
+  host: postgres-service
   existingSecret: "postgres-secret"
   secretKeys:
     userKey: POSTGRES_USER
     passwordKey: POSTGRES_PASSWORD
     dbKey: POSTGRES_DB
 
-db:
-  name: personal_website
-  user: postgres
-
-storage:
-  size: 1Gi
-
 resources:
   requests:
+    memory: "128Mi"
+    cpu: "100m"
+  limits:
     memory: "256Mi"
     cpu: "250m"
-  limits:
-    memory: "512Mi"
-    cpu: "500m"
