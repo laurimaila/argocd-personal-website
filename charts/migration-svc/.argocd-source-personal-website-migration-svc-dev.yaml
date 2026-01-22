@@ -1,0 +1,17 @@
+helm:
+  parameters:
+  - name: ingress.host
+    value: -dev.laurimaila.com
+    forcestring: false
+  - name: ingress.cors.allowOrigin
+    value: https://vm2-dev.laurimaila.com
+    forcestring: false
+  - name: ingress.annotations.traefik\.ingress\.kubernetes\.io/router\.tls\.certresolver
+    value: myresolver
+    forcestring: false
+  - name: image.tag
+    value: dev@sha256:3b55aa00f768ce6ea4485f5daabe83f0fc42df62dbf41f6d20bc92bcf8aa32e1
+    forcestring: true
+  - name: image.name
+    value: ghcr.io/laurimaila/liquibase-svc
+    forcestring: true
