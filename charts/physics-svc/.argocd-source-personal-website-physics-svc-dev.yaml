@@ -10,7 +10,7 @@ helm:
     value: myresolver
     forcestring: false
   - name: image.tag
-    value: 1.4.2
+    value: dev@sha256:aad2c3bf77409a4fb49595c962adc3fac993edd900769ad55041d6d6a332dc90
     forcestring: true
   - name: image.name
     value: ghcr.io/laurimaila/physics-svc
