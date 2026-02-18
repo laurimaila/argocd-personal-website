@@ -1,0 +1,63 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: logging-stack
+  namespace: argocd
+spec:
+  generators:
+    - list:
+        elements:
+          - component: loki
+            repoURL: https://grafana.github.io/helm-charts
+            chart: loki
+            targetRevision: 6.27.0
+          - component: grafana
+            repoURL: https://grafana.github.io/helm-charts
+            chart: grafana
+            targetRevision: 8.10.1
+          - component: promtail
+            repoURL: https://grafana.github.io/helm-charts
+            chart: promtail
+            targetRevision: 6.16.6
+  template:
+    metadata:
+      name: "centralized-logging-{{component}}"
+      namespace: argocd
+    spec:
+      project: default
+      sources:
+        - repoURL: "{{repoURL}}"
+          chart: "{{chart}}"
+          targetRevision: "{{targetRevision}}"
+          helm:
+            valueFiles:
+              - $values/logging/{{component}}/values.yaml
+        - repoURL: https://github.com/laurimaila/argocd-personal-website.git
+          targetRevision: main
+          ref: values
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: logging
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: grafana
+  namespace: logging
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`grafana.laurimaila.com`)
+      kind: Rule
+      services:
+        - name: centralized-logging-grafana
+          port: 80
+  tls:
+    certResolver: myresolver

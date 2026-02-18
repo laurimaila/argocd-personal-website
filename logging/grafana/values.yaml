@@ -1,0 +1,28 @@
+image:
+  tag: 12.3.3
+persistence:
+  enabled: true
+  size: 2Gi
+sidecar:
+  datasources:
+    enabled: true
+    label: grafana_datasource
+    labelValue: "1"
+    searchNamespace: ALL
+resources:
+  limits:
+    cpu: 200m
+    memory: 512Mi
+  requests:
+    cpu: 100m
+    memory: 256Mi
+datasources:
+  datasources.yaml:
+    apiVersion: 1
+    datasources:
+    - name: Loki
+      type: loki
+      access: proxy
+      url: http://centralized-logging-loki-gateway.logging.svc.cluster.local
+      version: 1
+      isDefault: true

@@ -1,6 +1,6 @@
 # ArgoCD for Full-Stack Personal Website
 
-This repository contains GitOps configuration for deploying and managing a full-stack personal website. Images in both environments are automatically updated with [argocd-image-updater](https://github.com/argoproj-labs/argocd-image-updater).
+This repository contains GitOps configuration for my full-stack personal website. Images in both environments are automatically updated with [argocd-image-updater](https://github.com/argoproj-labs/argocd-image-updater).
 
 **Production:** [https://vm2.laurimaila.com](https://vm2.laurimaila.com)  
 **Development:** [https://vm2-dev.laurimaila.com](https://vm2-dev.laurimaila.com)
