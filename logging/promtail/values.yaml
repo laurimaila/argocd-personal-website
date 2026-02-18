@@ -1,0 +1,10 @@
+config:
+  clients:
+    - url: http://centralized-logging-loki-gateway.logging.svc.cluster.local/loki/api/v1/push
+resources:
+  limits:
+    cpu: 200m
+    memory: 256Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
