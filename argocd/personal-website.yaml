@@ -72,13 +72,13 @@ spec:
             - name: ingress.cors.allowOrigin
               value: "https://vm2{{suffix}}.laurimaila.com"
             - name: ingress.annotations.traefik\.ingress\.kubernetes\.io/router\.tls\.certresolver
-              value: "myresolver"
+              value: "leresolver"
             - name: image.tag
               value: "{{imageTag}}"
             - name: postgres.host
-              value: "postgres{{suffix}}"
+              value: "postgres"
             - name: physicsService.host
-              value: "physics-svc{{suffix}}"
+              value: "physics-svc"
       destination:
         server: https://kubernetes.default.svc
         namespace: "{{namespace}}"

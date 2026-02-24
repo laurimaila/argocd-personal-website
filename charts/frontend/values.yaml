@@ -15,8 +15,6 @@ ingress:
   enabled: true
   className: traefik
   host: vm2.laurimaila.com
-  tls:
-    secretName: frontend-tls
 
 resources:
   requests:

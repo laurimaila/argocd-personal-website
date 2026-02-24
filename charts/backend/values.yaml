@@ -7,7 +7,7 @@ imagePullSecrets:
   - name: regcred
 
 postgres:
-  host: postgres-service
+  host: postgres
   existingSecret: "postgres-secret"
   secretKeys:
     userKey: POSTGRES_USER
@@ -22,8 +22,6 @@ ingress:
   enabled: true
   className: traefik
   host: api2.laurimaila.com
-  tls:
-    secretName: backend-tls
   cors:
     allowOrigin: "https://vm2.laurimaila.com"
 
