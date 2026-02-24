@@ -83,12 +83,19 @@ metadata:
   name: {{ .Chart.Name }}
   annotations:
     traefik.ingress.kubernetes.io/router.middlewares: "{{ .Release.Namespace }}-{{ .Chart.Name }}-cors@kubernetescrd,{{ .Release.Namespace }}-{{ .Chart.Name }}-ratelimit@kubernetescrd"
+    {{- with .Values.ingress.annotations }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
 spec:
   ingressClassName: traefik
   tls:
     - hosts:
         - {{ .Values.ingress.host }}
-      secretName: {{ .Values.ingress.tls.secretName }}
+      {{- with .Values.ingress.tls }}
+      {{- if .secretName }}
+      secretName: {{ .secretName }}
+      {{- end }}
+      {{- end }}
   rules:
     - host: {{ .Values.ingress.host }}
       http:

@@ -13,5 +13,5 @@ helm:
     value: https://vm2.laurimaila.com
     forcestring: false
   - name: ingress.annotations.traefik\.ingress\.kubernetes\.io/router\.tls\.certresolver
-    value: myresolver
+    value: leresolver
     forcestring: false

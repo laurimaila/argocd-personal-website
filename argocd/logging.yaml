@@ -60,4 +60,4 @@ spec:
         - name: centralized-logging-grafana
           port: 80
   tls:
-    certResolver: myresolver
+    certResolver: leresolver
