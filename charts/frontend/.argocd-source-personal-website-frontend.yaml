@@ -4,7 +4,7 @@ helm:
     value: ghcr.io/laurimaila/personal-website
     forcestring: true
   - name: image.tag
-    value: 1.3.3
+    value: 1.3.4
     forcestring: true
   - name: ingress.host
     value: vm2.laurimaila.com
@@ -13,5 +13,5 @@ helm:
     value: https://vm2.laurimaila.com
     forcestring: false
   - name: ingress.annotations.traefik\.ingress\.kubernetes\.io/router\.tls\.certresolver
-    value: leresolver
+    value: myresolver
     forcestring: false
