@@ -1,0 +1,17 @@
+helm:
+  parameters:
+  - name: ingress.host
+    value: vm2-dev.laurimaila.com
+    forcestring: false
+  - name: ingress.cors.allowOrigin
+    value: https://vm2-dev.laurimaila.com
+    forcestring: false
+  - name: ingress.annotations.traefik\.ingress\.kubernetes\.io/router\.tls\.certresolver
+    value: myresolver
+    forcestring: false
+  - name: image.tag
+    value: dev@sha256:de2af65fcbb56a4932ebc9ec8eb021fe3c24fbd53521091258ec450a41c3a586
+    forcestring: true
+  - name: image.name
+    value: ghcr.io/laurimaila/personal-website
+    forcestring: true
