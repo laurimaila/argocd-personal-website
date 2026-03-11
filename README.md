@@ -16,4 +16,4 @@ This repository contains GitOps configuration for my full-stack personal website
 ## Project Structure
 
 *   `argocd/`: Contains the ArgoCD `Application` custom resources that define the applications to be deployed. It also contains configurations for the image updater and ingress.
-*   `charts/`: Holds the Helm charts for the three main components of the application: `backend`, `frontend`, and `postgres`. Charts for frontend and backend use images built in their respective repositories.
+*   `charts/`: Holds the Helm charts for the main components of the application: `backend` and `frontend`. Charts for frontend and backend use images built in their respective repositories.
