@@ -21,9 +21,11 @@ jwt:
 ingress:
   enabled: true
   className: traefik
-  host: api2.laurimaila.com
+  host: prod.api.laurimaila.com
   cors:
-    allowOrigin: "https://vm2.laurimaila.com"
+    allowOrigin: "https://prod.laurimaila.com"
+  annotations:
+    traefik.ingress.kubernetes.io/router.tls.certresolver: leresolver
 
 physicsService:
   host: "physics-svc"

@@ -13,20 +13,29 @@ spec:
                 - branch: main
                   namespace: personal-website
                   suffix: ""
+                  frontendSubdomain: "prod"
           - list:
               elements:
                 - component: backend
-                  ingressSubdomain: "api2"
-                  imageTag: "1.4.2"
+                  imageName: ghcr.io/laurimaila/backend-personal-website
+                  updateStrategy: semver
+                  allowTags: "regexp:^[0-9]+\\.[0-9]+\\.[0-9]+$"
+                  ingressSubdomain: "prod.api"
                 - component: frontend
-                  ingressSubdomain: "vm2"
-                  imageTag: "1.3.2"
+                  imageName: ghcr.io/laurimaila/personal-website
+                  updateStrategy: semver
+                  allowTags: "regexp:^[0-9]+\\.[0-9]+\\.[0-9]+$"
+                  ingressSubdomain: "prod"
                 - component: physics-svc
+                  imageName: ghcr.io/laurimaila/physics-svc
+                  updateStrategy: semver
+                  allowTags: "regexp:^[0-9]+\\.[0-9]+\\.[0-9]+$"
                   ingressSubdomain: ""
-                  imageTag: "1.4.2"
                 - component: migration-svc
+                  imageName: ghcr.io/laurimaila/liquibase-svc
+                  updateStrategy: semver
+                  allowTags: "regexp:^[0-9]+\\.[0-9]+\\.[0-9]+$"
                   ingressSubdomain: ""
-                  imageTag: "1.4.2"
     # Dev
     - matrix:
         generators:
@@ -35,24 +44,38 @@ spec:
                 - branch: dev
                   namespace: personal-website-dev
                   suffix: "-dev"
+                  frontendSubdomain: "dev"
           - list:
               elements:
                 - component: backend
-                  ingressSubdomain: "api2"
-                  imageTag: "dev"
+                  imageName: ghcr.io/laurimaila/backend-personal-website:dev
+                  updateStrategy: digest
+                  allowTags: ".*"
+                  ingressSubdomain: "dev.api"
                 - component: frontend
-                  ingressSubdomain: "vm2"
-                  imageTag: "dev"
+                  imageName: ghcr.io/laurimaila/personal-website:dev
+                  updateStrategy: digest
+                  allowTags: ".*"
+                  ingressSubdomain: "dev"
                 - component: physics-svc
+                  imageName: ghcr.io/laurimaila/physics-svc:dev
+                  updateStrategy: digest
+                  allowTags: ".*"
                   ingressSubdomain: ""
-                  imageTag: "dev"
                 - component: migration-svc
+                  imageName: ghcr.io/laurimaila/liquibase-svc:dev
+                  updateStrategy: digest
+                  allowTags: ".*"
                   ingressSubdomain: ""
-                  imageTag: "dev"
   template:
     metadata:
       name: "personal-website-{{component}}{{suffix}}"
       namespace: argocd
+      annotations:
+        argocd-image-updater.argoproj.io/image-list: "{{component}}={{imageName}}"
+        argocd-image-updater.argoproj.io/{{component}}.update-strategy: "{{updateStrategy}}"
+        argocd-image-updater.argoproj.io/{{component}}.allow-tags: "{{allowTags}}"
+        argocd-image-updater.argoproj.io/write-back-method: argocd
     spec:
       project: default
       source:
@@ -62,17 +85,15 @@ spec:
         helm:
           parameters:
             - name: ingress.host
-              value: "{{ingressSubdomain}}{{suffix}}.laurimaila.com"
+              value: "{{ingressSubdomain}}.laurimaila.com"
             - name: ingress.cors.allowOrigin
-              value: "https://vm2{{suffix}}.laurimaila.com"
-            - name: ingress.annotations.traefik\.ingress\.kubernetes\.io/router\.tls\.certresolver
-              value: "leresolver"
-            - name: image.tag
-              value: "{{imageTag}}"
+              value: "https://{{frontendSubdomain}}.laurimaila.com"
             - name: postgres.host
               value: "postgres.postgres.svc.cluster.local"
             - name: physicsService.host
               value: "physics-svc"
+            - name: ingress.tls.secretName
+              value: "{{component}}-tls{{suffix}}"
       destination:
         server: https://kubernetes.default.svc
         namespace: "{{namespace}}"

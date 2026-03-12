@@ -62,9 +62,9 @@ spec:
   tls:
     - hosts:
         - {{ .Values.ingress.host }}
-      {{- with .Values.ingress.tls }}
-      {{- if .secretName }}
-      secretName: {{ .secretName }}
+      {{- if .Values.ingress.tls }}
+      {{- if .Values.ingress.tls.secretName }}
+      secretName: {{ .Values.ingress.tls.secretName }}
       {{- end }}
       {{- end }}
   rules:

@@ -14,7 +14,9 @@ service:
 ingress:
   enabled: true
   className: traefik
-  host: vm2.laurimaila.com
+  host: prod.laurimaila.com
+  annotations:
+    traefik.ingress.kubernetes.io/router.tls.certresolver: leresolver
 
 resources:
   requests:
