@@ -5,6 +5,15 @@ loki:
   auth_enabled: false
   storage:
     type: filesystem
+  limits_config:
+    retention_period: 3d
+  compactor:
+    working_directory: /var/loki/compactor
+    compaction_interval: 10m
+    retention_enabled: true
+    retention_delete_delay: 2h
+    retention_delete_worker_count: 10
+    delete_request_store: filesystem
   schemaConfig:
     configs:
       - from: "2024-04-01"
@@ -14,6 +23,10 @@ loki:
         index:
           prefix: index_
           period: 24h
+chunksCache:
+  enabled: false
+resultsCache:
+  enabled: false
 singleBinary:
   replicas: 1
   persistence:
@@ -22,10 +35,10 @@ singleBinary:
   resources:
     limits:
       cpu: 500m
-      memory: 1Gi
+      memory: 768Mi
     requests:
-      cpu: 100m
-      memory: 512Mi
+      cpu: 50m
+      memory: 256Mi
 read:
   replicas: 0
 write:

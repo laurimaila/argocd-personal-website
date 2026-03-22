@@ -1,10 +1,12 @@
 config:
   clients:
     - url: http://centralized-logging-loki-gateway.logging.svc.cluster.local/loki/api/v1/push
+      batchwait: 1s
+      batchsize: 512000
 resources:
   limits:
     cpu: 200m
-    memory: 256Mi
+    memory: 384Mi
   requests:
-    cpu: 100m
+    cpu: 50m
     memory: 128Mi

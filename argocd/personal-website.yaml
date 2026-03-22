@@ -50,22 +50,22 @@ spec:
                 - component: backend
                   imageName: ghcr.io/laurimaila/backend-personal-website:dev
                   updateStrategy: digest
-                  allowTags: ".*"
+                  allowTags: "regexp:.*"
                   ingressSubdomain: "dev.api"
                 - component: frontend
                   imageName: ghcr.io/laurimaila/personal-website:dev
                   updateStrategy: digest
-                  allowTags: ".*"
+                  allowTags: "regexp:.*"
                   ingressSubdomain: "dev"
                 - component: physics-svc
                   imageName: ghcr.io/laurimaila/physics-svc:dev
                   updateStrategy: digest
-                  allowTags: ".*"
+                  allowTags: "regexp:.*"
                   ingressSubdomain: ""
                 - component: migration-svc
                   imageName: ghcr.io/laurimaila/liquibase-svc:dev
                   updateStrategy: digest
-                  allowTags: ".*"
+                  allowTags: "regexp:.*"
                   ingressSubdomain: ""
   template:
     metadata:
@@ -75,6 +75,8 @@ spec:
         argocd-image-updater.argoproj.io/image-list: "{{component}}={{imageName}}"
         argocd-image-updater.argoproj.io/{{component}}.update-strategy: "{{updateStrategy}}"
         argocd-image-updater.argoproj.io/{{component}}.allow-tags: "{{allowTags}}"
+        argocd-image-updater.argoproj.io/{{component}}.helm.image-name: image.repository
+        argocd-image-updater.argoproj.io/{{component}}.helm.image-tag: image.tag
         argocd-image-updater.argoproj.io/write-back-method: argocd
     spec:
       project: default
