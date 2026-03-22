@@ -1,9 +1,9 @@
 image:
   tag: 12.3.3
 admin:
-  existingSecret: grafana-sealed-secret
-  userKey: admin-user
-  passwordKey: admin-password
+  existingSecret: logging-secrets
+  userKey: grafana-admin-user
+  passwordKey: grafana-admin-password
 persistence:
   enabled: true
   size: 2Gi
