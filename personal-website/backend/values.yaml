@@ -8,14 +8,14 @@ imagePullSecrets:
 
 postgres:
   host: postgres.postgres.svc.cluster.local
-  existingSecret: "postgres-secret"
+  existingSecret: "personal-website-secrets"
   secretKeys:
     userKey: POSTGRES_USER
     passwordKey: POSTGRES_PASSWORD
     dbKey: POSTGRES_DB
 
 jwt:
-  existingSecret: "backend-secrets"
+  existingSecret: "personal-website-secrets"
   secretKey: JWT_SECRET_KEY
 
 ingress:

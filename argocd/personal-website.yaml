@@ -83,7 +83,7 @@ spec:
       source:
         repoURL: https://github.com/laurimaila/argocd-personal-website.git
         targetRevision: "{{branch}}"
-        path: "charts/{{component}}"
+        path: "personal-website/{{component}}"
         helm:
           parameters:
             - name: ingress.host
@@ -96,6 +96,10 @@ spec:
               value: "physics-svc"
             - name: ingress.tls.secretName
               value: "{{component}}-tls{{suffix}}"
+            - name: postgres.existingSecret
+              value: "personal-website{{suffix}}-secrets"
+            - name: jwt.existingSecret
+              value: "personal-website{{suffix}}-secrets"
       destination:
         server: https://kubernetes.default.svc
         namespace: "{{namespace}}"
