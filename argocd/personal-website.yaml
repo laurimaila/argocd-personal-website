@@ -14,6 +14,7 @@ spec:
                   namespace: personal-website
                   suffix: ""
                   frontendSubdomain: "prod"
+                  apiSubdomain: "prod.api"
           - list:
               elements:
                 - component: backend
@@ -45,6 +46,7 @@ spec:
                   namespace: personal-website-dev
                   suffix: "-dev"
                   frontendSubdomain: "dev"
+                  apiSubdomain: "dev.api"
           - list:
               elements:
                 - component: backend
@@ -90,6 +92,10 @@ spec:
               value: "{{ingressSubdomain}}.laurimaila.com"
             - name: ingress.cors.allowOrigin
               value: "https://{{frontendSubdomain}}.laurimaila.com"
+            - name: env.nextPublicBaseUrl
+              value: "https://{{frontendSubdomain}}.laurimaila.com"
+            - name: env.nextPublicBackendUrl
+              value: "https://{{apiSubdomain}}.laurimaila.com"
             - name: postgres.host
               value: "postgres.postgres.svc.cluster.local"
             - name: physicsService.host
