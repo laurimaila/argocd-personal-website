@@ -1,0 +1,35 @@
+helm:
+  parameters:
+  - name: env.nextPublicBackendUrl
+    value: https://dev.api.laurimaila.com
+    forcestring: false
+  - name: env.nextPublicBaseUrl
+    value: https://dev.laurimaila.com
+    forcestring: false
+  - name: image.repository
+    value: ghcr.io/laurimaila/backend-personal-website
+    forcestring: true
+  - name: image.tag
+    value: dev@sha256:c02be7755b1711f15e7904575bd5d3a5ec3bbd978583ecf84c62ca861bf12c71
+    forcestring: true
+  - name: ingress.cors.allowOrigin
+    value: https://dev.laurimaila.com
+    forcestring: false
+  - name: ingress.host
+    value: dev.api.laurimaila.com
+    forcestring: false
+  - name: ingress.tls.secretName
+    value: backend-tls-dev
+    forcestring: false
+  - name: jwt.existingSecret
+    value: personal-website-dev-secrets
+    forcestring: false
+  - name: physicsService.host
+    value: physics-svc
+    forcestring: false
+  - name: postgres.existingSecret
+    value: personal-website-dev-secrets
+    forcestring: false
+  - name: postgres.host
+    value: postgres.postgres.svc.cluster.local
+    forcestring: false
