@@ -1,0 +1,35 @@
+helm:
+  parameters:
+  - name: env.nextPublicBackendUrl
+    value: https://dev.api.laurimaila.com
+    forcestring: false
+  - name: env.nextPublicBaseUrl
+    value: https://dev.laurimaila.com
+    forcestring: false
+  - name: image.repository
+    value: ghcr.io/laurimaila/physics-svc
+    forcestring: true
+  - name: image.tag
+    value: dev@sha256:c0208e40b84b20137537908b1ca1d97de27a5cadb741ac857d2698029e40ca38
+    forcestring: true
+  - name: ingress.cors.allowOrigin
+    value: https://dev.laurimaila.com
+    forcestring: false
+  - name: ingress.host
+    value: .laurimaila.com
+    forcestring: false
+  - name: ingress.tls.secretName
+    value: physics-svc-tls-dev
+    forcestring: false
+  - name: jwt.existingSecret
+    value: personal-website-dev-secrets
+    forcestring: false
+  - name: physicsService.host
+    value: physics-svc
+    forcestring: false
+  - name: postgres.existingSecret
+    value: personal-website-dev-secrets
+    forcestring: false
+  - name: postgres.host
+    value: postgres.postgres.svc.cluster.local
+    forcestring: false
