@@ -5,7 +5,9 @@ metadata:
   namespace: argocd
 spec:
   writeBackConfig:
-    method: argocd
+    method: git
+    gitConfig:
+      writeBackTarget: "helmvalues:values.yaml"
   applicationRefs:
     - namePattern: "personal-website-*"
       useAnnotations: true
