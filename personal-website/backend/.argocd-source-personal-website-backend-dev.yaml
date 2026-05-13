@@ -10,7 +10,7 @@ helm:
     value: ghcr.io/laurimaila/backend-personal-website
     forcestring: true
   - name: image.tag
-    value: dev@sha256:c02be7755b1711f15e7904575bd5d3a5ec3bbd978583ecf84c62ca861bf12c71
+    value: dev@sha256:3a64ca4d39c75517c00b185e06eb25de84ec11205cf5279e5c9081976f0cad1f
     forcestring: true
   - name: ingress.cors.allowOrigin
     value: https://dev.laurimaila.com
