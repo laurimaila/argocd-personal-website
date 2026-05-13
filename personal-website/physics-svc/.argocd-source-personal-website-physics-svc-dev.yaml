@@ -10,7 +10,7 @@ helm:
     value: ghcr.io/laurimaila/physics-svc
     forcestring: true
   - name: image.tag
-    value: dev@sha256:c0208e40b84b20137537908b1ca1d97de27a5cadb741ac857d2698029e40ca38
+    value: dev@sha256:0d19a1256395462b4b75727b61c95a59e6d50eacde37c618db74482872816888
     forcestring: true
   - name: ingress.cors.allowOrigin
     value: https://dev.laurimaila.com
