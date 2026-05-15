@@ -45,19 +45,19 @@ spec:
           - list:
               elements:
                 - component: backend
-                  imageName: ghcr.io/laurimaila/backend-personal-website:dev
-                  updateStrategy: digest
-                  allowTags: "regexp:.*"
+                  imageName: ghcr.io/laurimaila/backend-personal-website
+                  updateStrategy: semver
+                  allowTags: "regexp:^[0-9]+\\.[0-9]+\\.[0-9]+$"
                   ingressSubdomain: "dev.api"
                 - component: frontend
-                  imageName: ghcr.io/laurimaila/personal-website:dev
-                  updateStrategy: digest
-                  allowTags: "regexp:.*"
+                  imageName: ghcr.io/laurimaila/personal-website
+                  updateStrategy: semver
+                  allowTags: "regexp:^[0-9]+\\.[0-9]+\\.[0-9]+$"
                   ingressSubdomain: "dev"
                 - component: physics-svc
-                  imageName: ghcr.io/laurimaila/physics-svc:dev
-                  updateStrategy: digest
-                  allowTags: "regexp:.*"
+                  imageName: ghcr.io/laurimaila/physics-svc
+                  updateStrategy: semver
+                  allowTags: "regexp:^[0-9]+\\.[0-9]+\\.[0-9]+$"
                   ingressSubdomain: ""
   template:
     metadata:
