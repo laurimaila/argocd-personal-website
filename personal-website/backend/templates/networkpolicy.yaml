@@ -8,7 +8,6 @@ spec:
       app: {{ .Chart.Name }}
   policyTypes:
     - Ingress
-    - Egress
   ingress:
     - from:
         - namespaceSelector:
@@ -16,21 +15,3 @@ spec:
               kubernetes.io/metadata.name: traefik
       ports:
         - port: 8080
-  egress:
-    - to:
-        - namespaceSelector:
-            matchLabels:
-              kubernetes.io/metadata.name: postgres
-      ports:
-        - port: 5432
-    - to:
-        - podSelector:
-            matchLabels:
-              app: {{ .Values.physicsService.host }}
-      ports:
-        - port: 50051
-    - ports:
-        - port: 53
-          protocol: UDP
-        - port: 53
-          protocol: TCP
