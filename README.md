@@ -1,10 +1,8 @@
 # ArgoCD GitOps configuration
 
-This repository contains ArgoCD configuration for my personal website and its services. Images in both environments are automatically updated with [argocd-image-updater](https://github.com/argoproj-labs/argocd-image-updater). Secrets are handled using [External Secrets Operator](https://external-secrets.io/latest/) with OCI Vault.
+This repository contains ArgoCD configuration for my personal website and its services. Images in all environments are automatically updated with [argocd-image-updater](https://github.com/argoproj-labs/argocd-image-updater). Secrets are handled using [External Secrets Operator](https://external-secrets.io/latest/) with OCI Vault.
 
 **Production:** [https://prod.laurimaila.com](https://prod.laurimaila.com)
-
-**Development:** [https://dev.laurimaila.com](https://dev.laurimaila.com)
 
 ![ArgoCD Dashboard Screenshot](.github/images/argo-dashboard.png)
 

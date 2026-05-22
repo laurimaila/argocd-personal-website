@@ -32,33 +32,6 @@ spec:
                   updateStrategy: semver
                   allowTags: "regexp:^[0-9]+\\.[0-9]+\\.[0-9]+$"
                   ingressSubdomain: ""
-    # Dev
-    - matrix:
-        generators:
-          - list:
-              elements:
-                - branch: dev
-                  namespace: personal-website-dev
-                  suffix: "-dev"
-                  frontendSubdomain: "dev"
-                  apiSubdomain: "dev.api"
-          - list:
-              elements:
-                - component: backend
-                  imageName: ghcr.io/laurimaila/backend-personal-website
-                  updateStrategy: semver
-                  allowTags: "regexp:^[0-9]+\\.[0-9]+\\.[0-9]+$"
-                  ingressSubdomain: "dev.api"
-                - component: frontend
-                  imageName: ghcr.io/laurimaila/personal-website
-                  updateStrategy: semver
-                  allowTags: "regexp:^[0-9]+\\.[0-9]+\\.[0-9]+$"
-                  ingressSubdomain: "dev"
-                - component: physics-svc
-                  imageName: ghcr.io/laurimaila/physics-svc
-                  updateStrategy: semver
-                  allowTags: "regexp:^[0-9]+\\.[0-9]+\\.[0-9]+$"
-                  ingressSubdomain: ""
   template:
     metadata:
       name: "personal-website-{{component}}{{suffix}}"
