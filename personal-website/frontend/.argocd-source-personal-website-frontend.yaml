@@ -10,7 +10,7 @@ helm:
     value: ghcr.io/laurimaila/personal-website
     forcestring: true
   - name: image.tag
-    value: 1.4.1
+    value: 1.5.0
     forcestring: true
   - name: ingress.cors.allowOrigin
     value: https://prod.laurimaila.com
